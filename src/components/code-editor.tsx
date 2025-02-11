@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { Editor } from "@monaco-editor/react";
-import socket from "@/lib/socket";
 
 interface CodeEditorProps {
   fileName: string;

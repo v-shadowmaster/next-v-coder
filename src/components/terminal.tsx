@@ -5,6 +5,10 @@ import { Terminal } from "xterm";
 import "xterm/css/xterm.css";
 import socket from "@/lib/socket";
 
+interface TerminalData {
+  data: string;
+}
+
 const TerminalUI: React.FC = () => {
   const terminal = useRef<HTMLDivElement | null>(null);
   const isRendered = useRef(false);
@@ -30,9 +34,9 @@ const TerminalUI: React.FC = () => {
       console.log("Data written to terminal:", data);
     });
 
-    socket.on("terminal:data", (data: any) => {
+    socket.on("terminal:data", (data: TerminalData) => {
       console.log("Data received from terminal:", data);
-      term.write(data);
+      term.write(data.data);
     });
 
     return () => {

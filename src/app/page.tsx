@@ -119,9 +119,9 @@ export default function CloudIDE() {
             setShowVersionControl(!showVersionControl)
           }
           onToggleBrowser={() => setShowBrowser(!showBrowser)}
-          // currentFile={getCurrentFile()}
-          // onSave={handleSave}
-          // onRun={handleRun}
+          currentFile={getCurrentFile()} // Now using getCurrentFile
+          onSave={handleSave} // Now using handleSave
+          onRun={handleRun} // Now using handleRun
         />
         <div className="flex-1 overflow-hidden">
           <ResizablePanelGroup direction="horizontal">

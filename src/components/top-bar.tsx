@@ -16,23 +16,42 @@ interface TopBarProps {
   onToggleDebugger: () => void;
   onToggleVersionControl: () => void;
   onToggleBrowser: () => void;
+  currentFile?: {
+    path: string;
+    content: string;
+  };
+  onSave: () => void;
+  onRun: () => void;
 }
 
 export function TopBar({
   onToggleDebugger,
   onToggleVersionControl,
   onToggleBrowser,
+  currentFile,
+  onSave,
+  onRun,
 }: TopBarProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="flex items-center justify-between p-2 border-b border-border bg-background">
       <div className="flex items-center gap-2">
-        <Button size="sm" variant="outline">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={onSave}
+          disabled={!currentFile}
+        >
           <Save className="w-4 h-4 mr-2" />
           Save
         </Button>
-        <Button size="sm" variant="outline">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={onRun}
+          disabled={!currentFile}
+        >
           <Play className="w-4 h-4 mr-2" />
           Run
         </Button>

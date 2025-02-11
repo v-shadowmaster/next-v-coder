@@ -134,21 +134,18 @@ function FileTreeNode({
     });
   };
 
-  const handleClick = async (e: React.MouseEvent) => {
+  const onClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedItem(fullPath);
     if (isDir) {
       toggleFolder();
     } else {
-      // Fetch file content when a file is clicked
       try {
         const response = await fetch(
           `http://localhost:8000/files/content?path=${fullPath}`
         );
         const data = await response.json();
-        onFileOpen(fullPath, data.content);
-        // Emit file change event to socket
-        socket.emit("file:change", { path: fullPath, content: data.content });
+        onFileOpen(fullPath, data.content); // Pass both path and content
       } catch (error) {
         console.error("Error fetching file content:", error);
       }
@@ -167,7 +164,7 @@ function FileTreeNode({
           selectedItem === fullPath ? "bg-accent" : ""
         )}
         style={{ paddingLeft: `${level * 12 + 8}px` }}
-        onClick={handleClick}
+        onClick={onClick}
       >
         {isDir ? (
           <ChevronRight
