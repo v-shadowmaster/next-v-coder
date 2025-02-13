@@ -34,9 +34,9 @@ const TerminalUI: React.FC = () => {
       console.log("Data written to terminal:", data);
     });
 
-    socket.on("terminal:data", (data: TerminalData) => {
+    socket.on("terminal:data", (data: string) => {
       console.log("Data received from terminal:", data);
-      term.write(data.data);
+      term.write(data);
     });
 
     return () => {

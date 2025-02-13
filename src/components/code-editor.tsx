@@ -1,7 +1,35 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Editor } from "@monaco-editor/react";
+import { Editor, loader } from "@monaco-editor/react";
+
+loader.init().then((monaco) => {
+  monaco.editor.defineTheme("github-dark-default", {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "", foreground: "d1d5da" },
+      { token: "keyword", foreground: "ff7b72" },
+      { token: "string", foreground: "a5d6ff" },
+      { token: "number", foreground: "79c0ff" },
+      { token: "comment", foreground: "8b949e" },
+      { token: "type", foreground: "ffa657" },
+      { token: "class", foreground: "ffa657" },
+      { token: "function", foreground: "d2a8ff" },
+      { token: "variable", foreground: "ffa657" },
+    ],
+    colors: {
+      "editor.background": "#0d1117",
+      "editor.foreground": "#c9d1d9",
+      "editor.lineHighlightBackground": "#161b22",
+      "editor.selectionBackground": "#3392FF44",
+      "editor.inactiveSelectionBackground": "#3392FF22",
+      "editorCursor.foreground": "#c9d1d9",
+      "editorWhitespace.foreground": "#484f58",
+      "editorIndentGuide.background": "#21262d",
+    },
+  });
+});
 
 interface CodeEditorProps {
   fileName: string;
@@ -53,7 +81,7 @@ export function CodeEditor({
       <Editor
         height="100%"
         defaultLanguage="typescript"
-        theme="vs-dark"
+        theme="github-dark-default"
         value={content}
         onChange={handleEditorChange}
         onMount={(editor) => {

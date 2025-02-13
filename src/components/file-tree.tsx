@@ -153,7 +153,7 @@ function FileTreeNode({
   };
 
   if (!matchesSearch && !isExpanded) return null;
-  if (fileName === "node_modules") return null;
+  //if (fileName === "node_modules") return null;
 
   return (
     <div>
